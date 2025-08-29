@@ -1,0 +1,15 @@
+import React from 'react';
+import MainNav from "../components/MainNav.jsx";
+
+const BlogPage = () => {
+    return (
+        <>
+            <MainNav />
+            <h1>
+               blog 페이지 입니다.
+            </h1>
+        </>
+    );
+};
+
+export default BlogPage;
