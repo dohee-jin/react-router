@@ -1,19 +1,43 @@
 import {posts} from "../dummy-data/dummy-post.js";
 import PostCard from "../components/PostCard.jsx";
 import styles from "./BlogPage.module.scss"
+import {useSearchParams} from "react-router-dom";
 
 const BlogPage = () => {
 
-    // 에러 페이지 테스트를 위한 강제 에러 발생
-    /*useEffect(() => {
-        throw new Error('알 수 없는 에러가 발생했습니다.');
-    }, [])*/
+    /*
+        ? 뒤에 붙는 쿼리스트링 읽는법
+        useSearchParams는 배열을 리턴하는데
+        0번 인덱스: 쿼리스트링들을 모아놓은 객체
+        1번 인덱스: 쿼리스트링을 생성할 수 있는 함수를 리턴
+     */
+    const[searchParams] =useSearchParams();
+    console.log(`searchParams: `, searchParams)
+
+    const category = searchParams.get('category') || 'all';
+    const search = searchParams.get('search') || '';
+    const sort = searchParams.get('sort') || 'latest';
 
     return (
         <>
             <div className={styles.blog}>
                 <div className={styles.grid}>
-                    {posts.map(post =>
+                    {posts
+                        // 제목 또는 내용으로 검색
+                        .filter(post =>
+                            post.title.toLowerCase().includes(search) || post.excerpt.toLowerCase().includes(search)
+                        )
+                        // 카테고리로 검색
+                        .filter(post =>
+                            category === 'all' || post.category === category
+                        )
+                        // 정렬 (최신순, 오래된 순)
+                        .sort((a, b) =>
+                            sort === 'latest'
+                                ? new Date(b.date) - new Date(a.date)
+                                : new Date(a.date) - new Date(b.date)
+                        )
+                        .map(post =>
                         <PostCard key={post.id} post={post} />
                     )}
                 </div>
