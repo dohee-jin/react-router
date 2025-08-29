@@ -6,6 +6,7 @@ import {createBrowserRouter} from "react-router-dom";
 import RootLayout from "../layouts/RootLayout.jsx";
 import ErrorPage from "../pages/ErrorPage.jsx";
 import BlogPostDetailPage from "../pages/BlogPostDetailPage.jsx";
+import BlogLayout from "../layouts/BlogLayout.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -21,11 +22,18 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'blog',
-                element: <BlogPage />
-            },
-            {
-                path: 'blog/:postId',
-                element: <BlogPostDetailPage />
+                element: <BlogLayout />,
+                children: [
+                    {
+                        index: true,
+                        element: <BlogPage />
+                    },
+                    {
+                        path: ':postId',
+                        element: <BlogPostDetailPage />
+                    },
+                ]
+
             },
             {
                 path: 'about',

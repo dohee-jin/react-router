@@ -3,6 +3,7 @@ import PostCard from "../components/PostCard.jsx";
 import styles from "./BlogPage.module.scss"
 import {useSearchParams} from "react-router-dom";
 import BlogFilter from "../components/BlogFilter.jsx";
+import BlogSideBar from "../components/BlogSideBar.jsx";
 
 const BlogPage = () => {
 
