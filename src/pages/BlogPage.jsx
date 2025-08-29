@@ -1,4 +1,6 @@
-import styles from "./IndexPage.module.scss";
+import {posts} from "../dummy-data/dummy-post.js";
+import PostCard from "../components/PostCard.jsx";
+import styles from "./BlogPage.module.scss"
 
 const BlogPage = () => {
 
@@ -9,9 +11,13 @@ const BlogPage = () => {
 
     return (
         <>
-            <h1 className={styles.title}>
-               blog 페이지 입니다.
-            </h1>
+            <div className={styles.blog}>
+                <div className={styles.grid}>
+                    {posts.map(post =>
+                        <PostCard key={post.id} post={post} />
+                    )}
+                </div>
+            </div>
         </>
     );
 };
