@@ -1,11 +1,10 @@
 import React from 'react';
-import MainNav from "../components/MainNav.jsx";
+import styles from "./IndexPage.module.scss";
 
 const BlogPage = () => {
     return (
         <>
-            <MainNav />
-            <h1>
+            <h1 className={styles.title}>
                blog 페이지 입니다.
             </h1>
         </>
